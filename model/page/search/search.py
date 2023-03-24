@@ -11,3 +11,6 @@ class Search():
 
     def result(self):
         return self.__browser.find_element(By.CSS_SELECTOR, 'strong[class="result"]')
+
+    def warning(self):
+        return self.__browser.find_element(By.CSS_SELECTOR, 'strong[class="warning"]')

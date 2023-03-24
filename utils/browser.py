@@ -9,7 +9,7 @@ class Browser:
     windowSize: str = "default"
     windowSizes: {} = {
         "default": [1980, 1080]
-    } 
+    }
 
     def __init__(self, browser: str = "Chrome"):
         if browser == "Chrome":
