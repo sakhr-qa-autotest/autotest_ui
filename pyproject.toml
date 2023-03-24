@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "3-18"
+version = "0.1.0"
+description = ""
+authors = ["autotester <mail@google.com>"]
+readme = "README.md"
+packages = [{ include = "schemas" }]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.28.2"
+pytest = "^7.2.2"
+voluptuous = "^0.13.1"
+pytest-voluptuous = "^1.2.0"
+allure-pytest = "^2.12.1"
+curlify = "^2.2.1"
+selenium = "^4.8.2"
+webdriver-manager = "^3.8.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s %(message)s"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+addopts = " -s --alluredir=allure-results --allure-no-capture"
