@@ -1,0 +1,28 @@
+version: '3'
+services:
+  allure:
+    environment:
+      TZ: "Europe/Samara"
+    build:
+      context: ${PWD}
+      dockerfile: ./docker/allure-report/Dockerfile
+    volumes:
+      - ../allure-results:/var/allure-results/
+    ports:
+      - "35223:35223"
+    command: sh -c "allure serve /var/allure-results --port 35223"
+  python:
+    environment:
+      TZ: "Europe/Samara"
+    build:
+      context: ${PWD}
+      dockerfile: ./docker/python/Dockerfile
+    volumes:
+      - ../pyproject.toml:/var/pythonproject/pyproject.toml
+      - ../README.md:/var/pythonproject/README.md
+      - ../model:/var/pythonproject/model/
+      - ../schemas:/var/pythonproject/schemas/
+      - ../tests:/var/pythonproject/tests/
+      - ../utils:/var/pythonproject/utils/
+      - ../allure-results:/var/pythonproject/allure-results/
+    command: sh -c "poetry install && poetry run pytest"
