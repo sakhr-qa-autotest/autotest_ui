@@ -5,12 +5,11 @@ import utils.file
 
 class Settings:
     __url: str
-    __attachments: bool = True
+    __attachments: bool
     __browser: str
     __login: str
     __pwd: str
-
-    __headless: bool = True
+    __headless: bool
 
     def __init__(self, env: str):
         try:

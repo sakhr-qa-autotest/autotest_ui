@@ -1,3 +1,5 @@
+from distutils.util import strtobool
+
 import pytest
 
 from utils.allure_attach import AllureAttach
@@ -16,9 +18,9 @@ def pytest_addoption(parser):
 @pytest.fixture(scope='session')
 def settings(request) -> Settings:
     setting = Settings(request.config.getoption("--env"))
-    setting.setAttachments(request.config.getoption("--attachments"))
+    setting.setAttachments(bool(strtobool(request.config.getoption("--attachments"))))
     setting.setBrowser(request.config.getoption("--browser"))
-    setting.setHeadless(request.config.getoption("--headless"))
+    setting.setHeadless(bool(strtobool(request.config.getoption("--headless"))))
     return setting
 
 

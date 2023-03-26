@@ -1,5 +1,15 @@
 version: '3'
 services:
+  allureTwo:
+    image: "frankescobar/allure-docker-service"
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: 3
+      KEEP_HISTORY: 1
+    ports:
+      - "5050:5050"
+      - "4040:4040"
+    volumes:
+      - ../allure-results:/app/allure-results
   allure:
     environment:
       TZ: "Europe/Samara"
@@ -25,4 +35,5 @@ services:
       - ../tests:/var/pythonproject/tests/
       - ../utils:/var/pythonproject/utils/
       - ../allure-results:/var/pythonproject/allure-results/
-    command: sh -c "poetry install && poetry run pytest"
+      - ../config.test.json:/var/pythonproject/config.test.json
+    command: sh -c "poetry install && poetry run pytest --env=test --headless=false --attachments=false"
