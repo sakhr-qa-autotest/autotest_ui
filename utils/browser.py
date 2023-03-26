@@ -13,7 +13,10 @@ class Browser:
 
     def __init__(self, browser: str = "Chrome"):
         if browser == "Chrome":
-            Browser.browser = webdriver.Chrome(ChromeDriverManager().install())
+            options = webdriver.ChromeOptions()
+            options.add_argument('headless')
+            options.add_argument("--no-sandbox")
+            Browser.browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         else:
             Browser.browser = webdriver.Chrome(ChromeDriverManager().install())
 

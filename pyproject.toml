@@ -4,7 +4,10 @@ version = "0.1.0"
 description = ""
 authors = ["autotester <mail@google.com>"]
 readme = "README.md"
-packages = [{ include = "schemas" }]
+packages = [
+    {include = "model"},
+    {include = "utils"}
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -26,4 +29,4 @@ log_cli = true
 log_cli_level = "INFO"
 log_cli_format = "%(asctime)s %(message)s"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
-addopts = " -s --alluredir=allure-results --allure-no-capture"
+addopts = " -s --alluredir=./allure-results --allure-no-capture"

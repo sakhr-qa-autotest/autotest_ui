@@ -4,11 +4,12 @@ from model.page.header_menu import HeaderMenu
 from model.page.search.search import Search
 
 
+@allure.title("Успешный поиск")
 def test_successful_search(window):
     window.get("")
     headerMenu = HeaderMenu(window.driver())
 
-    with allure.step('Успешный поиск'):
+    with allure.step('Поиск по фразе build'):
         headerMenu.searchInput().send_keys("build")
         headerMenu.searchButton().click()
         search = Search(window.driver())
@@ -17,11 +18,12 @@ def test_successful_search(window):
         assert len(products) >= 1
 
 
+@allure.title("Неудачный поиск")
 def test_unsuccessful_search(window):
     window.get("")
     headerMenu = HeaderMenu(window.driver())
 
-    with allure.step('Неудачный поиск'):
+    with allure.step('Поиск по фразе testestest'):
         headerMenu.searchInput().send_keys("testestest")
         headerMenu.searchButton().click()
         search = Search(window.driver())
@@ -32,10 +34,11 @@ def test_unsuccessful_search(window):
         assert result.text == 'No products were found that matched your criteria.'
 
 
+@allure.title("Минимальная длина строки поиска")
 def test_minimum_input_length(window):
     window.get("")
     headerMenu = HeaderMenu(window.driver())
-    with allure.step('Минимальная длина строки поиска'):
+    with allure.step('Вводим 2 текстовых символа'):
         headerMenu.searchInput().send_keys("it")
         headerMenu.searchButton().click()
         search = Search(window.driver())

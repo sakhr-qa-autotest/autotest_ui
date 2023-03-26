@@ -5,16 +5,18 @@ from model.page.cart.product import Product
 from model.page.header_menu import HeaderMenu
 
 
+@allure.title("Состояние корзины в заголовке")
 def test_adding_to_cart(window, webshop):
     webshop.webshop.post('/addproducttocart/catalog/31/1/1')
     window.get("")
     headerMenu = HeaderMenu(window.driver())
 
-    with allure.step('Добавление товара в корзину'):
+    with allure.step('Состояние с не пустой корзиной'):
         cart = headerMenu.topcartlink()
         assert cart.text.strip('\n') != 'Shopping cart(0)'
 
 
+@allure.title("Проверка обязательных полей в корзине")
 def test_checking_cart_details(window, webshop):
     webshop.webshop.post('/addproducttocart/catalog/31/1/1')
     window.get("/cart")
@@ -25,15 +27,21 @@ def test_checking_cart_details(window, webshop):
 
     for element in products:
         product = Product(element)
-        name = product.name()
-        price = product.price()
-        remove = product.remove()
 
-        assert len(name.text) >= 1
-        assert len(price.text) >= 1
-        assert remove.get_attribute('name') == "removefromcart"
+        with allure.step('Название'):
+            name = product.name()
+            assert len(name.text) >= 1
+
+        with allure.step('Цена'):
+            price = product.price()
+            assert len(price.text) >= 1
+
+        with allure.step('Кнопка удалить из корзины'):
+            remove = product.remove()
+            assert remove.get_attribute('name') == "removefromcart"
 
 
+@allure.title("Удаление элемента из корзины")
 def test_removing_item_from_the_cart(window, webshop):
     webshop.webshop.post('/addproducttocart/catalog/31/1/1')
     window.get("/cart")
@@ -43,7 +51,8 @@ def test_removing_item_from_the_cart(window, webshop):
     assert len(products) >= 1
     for element in products:
         product = Product(element)
-        product.remove().click()
+        with allure.step('Удаление ' + product.name().text):
+            product.remove().click()
 
     cart.updatecart().click()
     orderSummaryContent = cart.orderSummaryContent()
