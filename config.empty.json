@@ -1,5 +1,9 @@
 {
   "url": "",
   "login": "",
-  "pwd": ""
+  "pwd": "",
+  "selenoid_hub": "",
+  "selenoid_video_hub": "",
+  "selenoid_login": "",
+  "selenoid_pass": ""
 }
