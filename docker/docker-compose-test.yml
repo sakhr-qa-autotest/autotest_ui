@@ -1,16 +1,15 @@
 version: '3'
 services:
-  allure:
+  allureTwo:
+    image: "frankescobar/allure-docker-service"
     environment:
-      TZ: "Europe/Samara"
-    build:
-      context: ${PWD}
-      dockerfile: ./docker/allure-report/Dockerfile
-    volumes:
-      - ../allure-results:/var/allure-results/
+      CHECK_RESULTS_EVERY_SECONDS: 3
+      KEEP_HISTORY: 1
     ports:
-      - "35223:35223"
-    command: sh -c "allure serve /var/allure-results --port 35223"
+      - "5050:5050"
+      - "4040:4040"
+    volumes:
+      - ../allure-results:/app/allure-results
   python:
     environment:
       TZ: "Europe/Samara"
