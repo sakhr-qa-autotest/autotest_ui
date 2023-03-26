@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.webdriver import WebDriver
 from webdriver_manager.chrome import ChromeDriverManager
 
+from utils.settings import Settings
+
 
 class Browser:
     browser: WebDriver = None
@@ -11,11 +13,14 @@ class Browser:
         "default": [1980, 1080]
     }
 
-    def __init__(self, browser: str = "Chrome"):
-        if browser == "Chrome":
+    def __init__(self, settings: Settings):
+        if settings.browser() == "Chrome":
             options = webdriver.ChromeOptions()
-            options.add_argument('headless')
-            options.add_argument("--no-sandbox")
+
+            if settings.headless() == False:
+                options.add_argument('headless')
+                options.add_argument("--no-sandbox")
+
             Browser.browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         else:
             Browser.browser = webdriver.Chrome(ChromeDriverManager().install())

@@ -1,11 +1,12 @@
 from utils.base_session import BaseSession
+from utils.settings import Settings
 
 
 class Authorization:
     authorizationCookie = None
 
-    def __init__(self):
-        self.webshop = BaseSession(url="https://demowebshop.tricentis.com")
+    def __init__(self, settings: Settings):
+        self.webshop = BaseSession(url=settings.url())
         self.authorizationCookie = None
 
     def login(self, email, password):
