@@ -1,5 +1,9 @@
 {
   "url": "https://demowebshop.tricentis.com",
   "login": "testuser123@mail.com",
-  "pwd": "testuser123"
+  "pwd": "testuser123",
+  "selenoid_hub": "",
+  "selenoid_video_hub": "",
+  "selenoid_login": "",
+  "selenoid_pass": ""
 }

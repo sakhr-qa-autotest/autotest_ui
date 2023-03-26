@@ -13,14 +13,29 @@ def pytest_addoption(parser):
     parser.addoption("--attachments", default=True)
     parser.addoption("--browser", default="Chrome")
     parser.addoption("--headless", default=True)
+    parser.addoption("--remote", default=False)
 
 
 @pytest.fixture(scope='session')
 def settings(request) -> Settings:
     setting = Settings(request.config.getoption("--env"))
-    setting.setAttachments(bool(strtobool(request.config.getoption("--attachments"))))
     setting.setBrowser(request.config.getoption("--browser"))
-    setting.setHeadless(bool(strtobool(request.config.getoption("--headless"))))
+
+    if type(request.config.getoption("--attachments")) != type(True):
+        setting.setAttachments(bool(strtobool(request.config.getoption("--attachments"))))
+    else:
+        setting.setAttachments(request.config.getoption("--attachments"))
+
+    if type(request.config.getoption("--headless")) != type(True):
+        setting.setHeadless(bool(strtobool(request.config.getoption("--headless"))))
+    else:
+        setting.setHeadless(request.config.getoption("--headless"))
+
+    if type(request.config.getoption("--remote")) != type(True):
+        setting.setRemote(bool(strtobool(request.config.getoption("--remote"))))
+    else:
+        setting.setRemote(request.config.getoption("--remote"))
+
     return setting
 
 
@@ -39,7 +54,7 @@ def window(webshop, cookie, settings):
     browser.add_cookie(cookie)
     yield browser
     allureAttach = AllureAttach(settings)
-    allureAttach.image(browser.driver())
+    allureAttach.add(browser.driver())
     browser.close()
 
 

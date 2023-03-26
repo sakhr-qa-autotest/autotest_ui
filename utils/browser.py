@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -14,16 +15,33 @@ class Browser:
     }
 
     def __init__(self, settings: Settings):
-        if settings.browser() == "Chrome":
-            options = webdriver.ChromeOptions()
+        if settings.remote() == True:
+            options = Options()
+            selenoid_capabilities = {
+                "browserName": "chrome",
+                "browserVersion": "100.0",
+                "selenoid:options": {
+                    "enableVNC": True,
+                    "enableVideo": True
+                }
+            }
 
-            if settings.headless() == False:
-                options.add_argument('headless')
-                options.add_argument("--no-sandbox")
-
-            Browser.browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            options.capabilities.update(selenoid_capabilities)
+            Browser.browser = webdriver.Remote(
+                command_executor=f"https://{settings.selenoidLogin()}:{settings.selenoidPass()}@{settings.selenoidHub()}",
+                options=options
+            )
         else:
-            Browser.browser = webdriver.Chrome(ChromeDriverManager().install())
+            if settings.browser() == "Chrome":
+                options = webdriver.ChromeOptions()
+
+                if settings.headless() == False:
+                    options.add_argument('headless')
+                    options.add_argument("--no-sandbox")
+
+                Browser.browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            else:
+                Browser.browser = webdriver.Chrome(ChromeDriverManager().install())
 
     def get(self, url: str = None):
         if url is None:
