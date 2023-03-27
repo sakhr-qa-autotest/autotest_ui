@@ -5,5 +5,9 @@
   "selenoid_hub": "",
   "selenoid_video_hub": "",
   "selenoid_login": "",
-  "selenoid_pass": ""
+  "selenoid_pass": "",
+  "browserstack_hub": "https://hub.browserstack.com/wd/hub",
+  "browserstack_video_hub": "",
+  "browserstack_user_name": "",
+  "browserstack_access_key": ""
 }

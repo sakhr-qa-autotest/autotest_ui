@@ -10,12 +10,18 @@ class Settings:
     __login: str
     __pwd: str
     __headless: bool
-    __remote: bool
+    __selenoid: bool
+    __browserstack: bool
 
     __selenoid_hub: str
     __selenoid_video_hub: str
     __selenoid_login: str
     __selenoid_pass: str
+
+    __browserstack_hub: str
+    __browserstack_video_hub: str
+    __browserstack_user_name: str
+    __browserstack_access_key: str
 
     def __init__(self, env: str):
         try:
@@ -37,6 +43,15 @@ class Settings:
                 self.__selenoid_login = config['selenoid_login']
             if 'selenoid_pass' in config:
                 self.__selenoid_pass = config['selenoid_pass']
+
+            if 'browserstack_hub' in config:
+                self.__browserstack_hub = config['browserstack_hub']
+            if 'browserstack_video_hub' in config:
+                self.__browserstack_video_hub = config['browserstack_video_hub']
+            if 'browserstack_user_name' in config:
+                self.__browserstack_user_name = config['browserstack_user_name']
+            if 'browserstack_access_key' in config:
+                self.__browserstack_access_key = config['browserstack_access_key']
         except:
             raise Exception("Environment file not found")
 
@@ -49,11 +64,17 @@ class Settings:
     def setHeadless(self, value: bool):
         self.__headless = value
 
-    def remote(self) -> bool:
-        return self.__remote
+    def browserstack(self) -> bool:
+        return self.__browserstack
 
-    def setRemote(self, value: bool):
-        self.__remote = value
+    def setBrowserstack(self, value: bool):
+        self.__browserstack = value
+
+    def selenoid(self) -> bool:
+        return self.__selenoid
+
+    def setSelenoid(self, value: bool):
+        self.__selenoid = value
 
     def attachments(self) -> bool:
         return self.__attachments
@@ -84,3 +105,15 @@ class Settings:
 
     def selenoidPass(self) -> str:
         return self.__selenoid_pass
+
+    def browserstackHub(self) -> str:
+        return self.__browserstack_hub
+
+    def browserstackVideoHub(self) -> str:
+        return self.__browserstack_video_hub
+
+    def browserstackUserName(self) -> str:
+        return self.__browserstack_user_name
+
+    def browserstackAccessKey(self) -> str:
+        return self.__browserstack_access_key

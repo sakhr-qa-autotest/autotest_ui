@@ -15,22 +15,10 @@ class Browser:
     }
 
     def __init__(self, settings: Settings):
-        if settings.remote() == True:
-            options = Options()
-            selenoid_capabilities = {
-                "browserName": "chrome",
-                "browserVersion": "100.0",
-                "selenoid:options": {
-                    "enableVNC": True,
-                    "enableVideo": True
-                }
-            }
-
-            options.capabilities.update(selenoid_capabilities)
-            Browser.browser = webdriver.Remote(
-                command_executor=f"https://{settings.selenoidLogin()}:{settings.selenoidPass()}@{settings.selenoidHub()}",
-                options=options
-            )
+        if settings.selenoid() == True:
+            self.__selenoid(settings)
+        elif settings.browserstack() == True:
+            self.__browserstack(settings)
         else:
             if settings.browser() == "Chrome":
                 options = webdriver.ChromeOptions()
@@ -39,9 +27,9 @@ class Browser:
                     options.add_argument('headless')
                     options.add_argument("--no-sandbox")
 
-                Browser.browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+                self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
             else:
-                Browser.browser = webdriver.Chrome(ChromeDriverManager().install())
+                self.browser = webdriver.Chrome(ChromeDriverManager().install())
 
     def get(self, url: str = None):
         if url is None:
@@ -75,3 +63,39 @@ class Browser:
 
     def close(self):
         self.browser.close()
+
+    def __selenoid(self, settings: Settings) -> WebDriver:
+        options = Options()
+        selenoid_capabilities = {
+            "browserName": "chrome",
+            "browserVersion": "100.0",
+            "selenoid:options": {
+                "enableVNC": True,
+                "enableVideo": True
+            }
+        }
+
+        options.capabilities.update(selenoid_capabilities)
+        self.browser = webdriver.Remote(
+            command_executor=f"https://{settings.selenoidLogin()}:{settings.selenoidPass()}@{settings.selenoidHub()}",
+            options=options
+        )
+        return self.browser
+
+    def __browserstack(self, settings: Settings) -> WebDriver:
+        options = Options()
+        bstack_options = {
+            "os": "OS X",
+            "osVersion": "Monterey",
+            "buildName": "browserstack-build-1",
+            "sessionName": "BStack single python",
+            "userName": settings.browserstackUserName(),
+            "accessKey": settings.browserstackAccessKey(),
+        }
+
+        options.set_capability('bstack:options', bstack_options)
+        self.browser = webdriver.Remote(
+            command_executor=settings.browserstackHub(),
+            options=options
+        )
+        return self.browser

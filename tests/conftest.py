@@ -13,7 +13,8 @@ def pytest_addoption(parser):
     parser.addoption("--attachments", default=True)
     parser.addoption("--browser", default="Chrome")
     parser.addoption("--headless", default=True)
-    parser.addoption("--remote", default=False)
+    parser.addoption("--selenoid", default=False)
+    parser.addoption("--browserstack", default=False)
 
 
 @pytest.fixture(scope='session')
@@ -31,10 +32,15 @@ def settings(request) -> Settings:
     else:
         setting.setHeadless(request.config.getoption("--headless"))
 
-    if type(request.config.getoption("--remote")) != type(True):
-        setting.setRemote(bool(strtobool(request.config.getoption("--remote"))))
+    if type(request.config.getoption("--selenoid")) != type(True):
+        setting.setSelenoid(bool(strtobool(request.config.getoption("--selenoid"))))
     else:
-        setting.setRemote(request.config.getoption("--remote"))
+        setting.setSelenoid(request.config.getoption("--selenoid"))
+
+    if type(request.config.getoption("--browserstack")) != type(True):
+        setting.setBrowserstack(bool(strtobool(request.config.getoption("--browserstack"))))
+    else:
+        setting.setBrowserstack(request.config.getoption("--browserstack"))
 
     return setting
 
