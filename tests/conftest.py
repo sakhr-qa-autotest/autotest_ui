@@ -61,7 +61,7 @@ def window(webshop, cookie, settings):
     yield browser
     allureAttach = AllureAttach(settings)
     allureAttach.add(browser.driver())
-    browser.close()
+    browser.quit()
 
 
 @pytest.fixture(scope='session')

@@ -64,6 +64,9 @@ class Browser:
     def close(self):
         self.browser.close()
 
+    def quit(self):
+        return self.browser.quit()
+
     def __selenoid(self, settings: Settings) -> WebDriver:
         options = Options()
         selenoid_capabilities = {
