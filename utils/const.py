@@ -1,3 +1,5 @@
 BROWSERSTACK = "browserstack"
 LOCAL = "local"
 SELENOID = "selenoid"
+CHROME="chrome"
+FIREFOX="firefox"

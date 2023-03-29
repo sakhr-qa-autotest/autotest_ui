@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from webdriver_manager.chrome import ChromeDriverManager
 
+from utils.const import CHROME
 from utils.settings import Settings
 
 
@@ -22,7 +23,7 @@ class Browser:
         elif settings.browserstack() == True:
             self.__browserstack(settings)
         else:
-            if settings.browser() == "Chrome":
+            if settings.browser().lower() == CHROME.lower():
                 options = webdriver.ChromeOptions()
 
                 if settings.headless() == True:
