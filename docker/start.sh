@@ -1,0 +1,1 @@
+cd ../ && rm -rf ./allure-results && docker-compose -f docker/docker-compose.yml stop && docker-compose -f docker/docker-compose.yml rm -f && docker-compose -f docker/docker-compose.yml build && docker-compose -f docker/docker-compose.yml up python && docker-compose -f docker/docker-compose.yml up allure

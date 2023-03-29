@@ -1,17 +1,23 @@
 import json
 
 import utils.file
+from utils.const import SELENOID, BROWSERSTACK, LOCAL
 
 
 class Settings:
     __url: str
     __attachments: bool
     __browser: str
+    __browserVersion: str
     __login: str
     __pwd: str
-    __headless: bool
-    __selenoid: bool
-    __browserstack: bool
+    __headless: bool = False
+    __selenoid: bool = False
+    __browserstack: bool = False
+    __local: bool = False
+
+    __os: str
+    __osVersion: str
 
     __selenoid_hub: str
     __selenoid_video_hub: str
@@ -22,6 +28,8 @@ class Settings:
     __browserstack_video_hub: str
     __browserstack_user_name: str
     __browserstack_access_key: str
+
+    __driver: str
 
     def __init__(self, env: str):
         try:
@@ -55,6 +63,22 @@ class Settings:
         except:
             raise Exception("Environment file not found")
 
+    def setDriver(self, driver: str):
+        if BROWSERSTACK.lower() == driver.lower():
+            self.__browserstack = True
+        elif SELENOID.lower() == driver.lower():
+            self.__selenoid = True
+        elif LOCAL.lower() == driver.lower():
+            self.__local = True
+
+        self.__driver = driver
+
+    def driver(self) -> str:
+        return self.__driver
+
+    def local(self) -> bool:
+        return self.__local
+
     def url(self) -> str:
         return self.__url
 
@@ -85,8 +109,26 @@ class Settings:
     def browser(self) -> str:
         return self.__browser
 
+    def browserVersion(self) -> str:
+        return self.__browserVersion
+
+    def setOsVersion(self, value: str):
+        self.__osVersion = value
+
+    def osVersion(self) -> str:
+        return self.__osVersion
+
+    def setOs(self, value: str):
+        self.__os = value
+
+    def os(self) -> str:
+        return self.__os
+
     def setBrowser(self, value: str):
         self.__browser = value
+
+    def setBrowserVersion(self, value: str):
+        self.__browserVersion = value
 
     def login(self) -> str:
         return self.__login

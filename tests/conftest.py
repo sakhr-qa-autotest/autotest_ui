@@ -11,36 +11,32 @@ from utils.settings import Settings
 def pytest_addoption(parser):
     parser.addoption("--env", default="test")
     parser.addoption("--attachments", default=True)
+    parser.addoption("--driver", default="local")  # selenoid #browserstack #local
     parser.addoption("--browser", default="Chrome")
-    parser.addoption("--headless", default=True)
-    parser.addoption("--selenoid", default=False)
-    parser.addoption("--browserstack", default=False)
+    parser.addoption("--browserVersion", default="103.0")
+    parser.addoption("--os", default="Windows")
+    parser.addoption("--osVersion", default="11")
+    parser.addoption("--headless", default=False)
 
 
 @pytest.fixture(scope='session')
 def settings(request) -> Settings:
     setting = Settings(request.config.getoption("--env"))
     setting.setBrowser(request.config.getoption("--browser"))
-
-    if type(request.config.getoption("--attachments")) != type(True):
-        setting.setAttachments(bool(strtobool(request.config.getoption("--attachments"))))
-    else:
-        setting.setAttachments(request.config.getoption("--attachments"))
+    setting.setBrowserVersion(request.config.getoption("--browserVersion"))
+    setting.setOs(request.config.getoption("--os"))
+    setting.setOsVersion(request.config.getoption("--osVersion"))
+    setting.setDriver(request.config.getoption("--driver"))
 
     if type(request.config.getoption("--headless")) != type(True):
         setting.setHeadless(bool(strtobool(request.config.getoption("--headless"))))
     else:
         setting.setHeadless(request.config.getoption("--headless"))
 
-    if type(request.config.getoption("--selenoid")) != type(True):
-        setting.setSelenoid(bool(strtobool(request.config.getoption("--selenoid"))))
+    if type(request.config.getoption("--attachments")) != type(True):
+        setting.setAttachments(bool(strtobool(request.config.getoption("--attachments"))))
     else:
-        setting.setSelenoid(request.config.getoption("--selenoid"))
-
-    if type(request.config.getoption("--browserstack")) != type(True):
-        setting.setBrowserstack(bool(strtobool(request.config.getoption("--browserstack"))))
-    else:
-        setting.setBrowserstack(request.config.getoption("--browserstack"))
+        setting.setAttachments(request.config.getoption("--attachments"))
 
     return setting
 

@@ -1,3 +1,5 @@
+import datetime
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
@@ -23,7 +25,7 @@ class Browser:
             if settings.browser() == "Chrome":
                 options = webdriver.ChromeOptions()
 
-                if settings.headless() == False:
+                if settings.headless() == True:
                     options.add_argument('headless')
                     options.add_argument("--no-sandbox")
 
@@ -70,8 +72,8 @@ class Browser:
     def __selenoid(self, settings: Settings) -> WebDriver:
         options = Options()
         selenoid_capabilities = {
-            "browserName": "chrome",
-            "browserVersion": "100.0",
+            "browserName": settings.browser(),
+            "browserVersion": settings.browserVersion(),
             "selenoid:options": {
                 "enableVNC": True,
                 "enableVideo": True
@@ -88,10 +90,15 @@ class Browser:
     def __browserstack(self, settings: Settings) -> WebDriver:
         options = Options()
         bstack_options = {
-            "os": "OS X",
-            "osVersion": "Monterey",
+            "browserName": settings.browser(),
+            "browserVersion": settings.browserVersion(),
+            "os": settings.os(),
+            "osVersion": settings.osVersion(),
             "buildName": "browserstack-build-1",
-            "sessionName": "BStack single python",
+            "sessionName":
+                datetime.datetime.now().strftime(
+                    '%d-%m-%y|%H:%M:%S'
+                ).__str__() + " " + settings.browser() + "_" + settings.browserVersion() + "_" + settings.os() + "_" + settings.osVersion(),
             "userName": settings.browserstackUserName(),
             "accessKey": settings.browserstackAccessKey(),
         }
