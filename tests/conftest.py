@@ -17,6 +17,7 @@ def pytest_addoption(parser):
     parser.addoption("--os", default="Windows")
     parser.addoption("--osVersion", default="11")
     parser.addoption("--headless", default=False)
+    parser.addoption("--customDriver", default=False)
 
 
 @pytest.fixture(scope='session')
@@ -37,6 +38,11 @@ def settings(request) -> Settings:
         setting.setAttachments(bool(strtobool(request.config.getoption("--attachments"))))
     else:
         setting.setAttachments(request.config.getoption("--attachments"))
+
+    if type(request.config.getoption("--customDriver")) != type(True):
+        setting.setCustomDriver(bool(strtobool(request.config.getoption("--customDriver"))))
+    else:
+        setting.setCustomDriver(request.config.getoption("--customDriver"))
 
     return setting
 

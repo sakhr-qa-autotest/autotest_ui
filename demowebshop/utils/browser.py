@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from webdriver_manager.chrome import ChromeDriverManager
 
 from demowebshop.utils.const import CHROME
+from demowebshop.utils.file import abs_path_from_project
 from demowebshop.utils.settings import Settings
 
 
@@ -24,21 +25,9 @@ class Browser:
             self.__browserstack(settings)
         else:
             if settings.browser().lower() == CHROME.lower():
-                options = webdriver.ChromeOptions()
-
-                if settings.headless() == True:
-                    options.add_argument('headless')
-                    options.add_argument("--no-sandbox")
-
-                self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+                self.browser = self.__chrome(settings)
             else:
-                options = webdriver.ChromeOptions()
-
-                if settings.headless() == True:
-                    options.add_argument('headless')
-                    options.add_argument("--no-sandbox")
-
-                self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+                self.browser = self.__chrome(settings)
 
     def get(self, url: str = None):
         if url is None:
@@ -116,3 +105,18 @@ class Browser:
             options=options
         )
         return self.browser
+
+    def __chrome(self, settings: Settings) -> webdriver:
+        options = webdriver.ChromeOptions()
+
+        if settings.headless() == True:
+            options.add_argument('headless')
+            options.add_argument("--no-sandbox")
+
+        if settings.customDriver() == True:
+            return webdriver.Chrome(
+                executable_path=abs_path_from_project('../drivers/chromedriver'),
+                options=options
+            )
+
+        return webdriver.Chrome(ChromeDriverManager().install(), options=options)

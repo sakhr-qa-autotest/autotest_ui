@@ -16,6 +16,8 @@ class Settings:
     __browserstack: bool = False
     __local: bool = False
 
+    __customDriver: bool = False
+
     __os: str
     __osVersion: str
 
@@ -62,6 +64,12 @@ class Settings:
                 self.__browserstack_access_key = config['browserstack_access_key']
         except:
             raise Exception("Environment file not found")
+
+    def setCustomDriver(self, value=False):
+        self.__customDriver = value
+
+    def customDriver(self) -> bool:
+        return self.__customDriver
 
     def setDriver(self, driver: str):
         if BROWSERSTACK.lower() == driver.lower():
