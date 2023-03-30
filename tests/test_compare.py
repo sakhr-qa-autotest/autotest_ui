@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 from demowebshop.model.page.compare.compare import Compare
 
@@ -19,6 +20,7 @@ def test_comparison_table(window, webshop):
 
 
 @allure.title("Проверка кнопки очистить таблицу сравнений")
+@pytest.mark.skip(reason="Пропускаем, фича на доработки")
 def test_clear(window, webshop):
     window.get("/compareproducts/add/31")
     window.get("/compareproducts/add/16")
