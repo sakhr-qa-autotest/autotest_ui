@@ -124,7 +124,7 @@ allure_test_mobile | Server started at <http://172.18.0.3:35223/>. Press <Ctrl+C
 rm -rf allure-results
 ```
 
-<img width="90%" title="pytest" src="media/dockerrun.gif" />
+<img width="100%" title="pytest" src="media/dockerrun.gif" />
 
 <a name="запуск_startsh"></a>
 
