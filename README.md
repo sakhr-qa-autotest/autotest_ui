@@ -21,7 +21,7 @@
 
 Результаты
 
-5. [Результат прохождения тестов](#report1)
+5. [Результат прохождения тестов](#report)
 1. [Пример работы тестов (видео)](#reportVideo)
 2. [Результаты тестов в телеграм](#reportTelegram)
 
@@ -146,6 +146,7 @@ rm -rf allure-results
 <img width="90%" title="pytest" src="media/jenkins.png" />
 </details>
 
+<a name="report"></a>
 # [Отчет](https://jenkins.autotests.cloud/job/sakhr_autotest_ui/8/allure/#) о выполнении тестов
 
 <details>
