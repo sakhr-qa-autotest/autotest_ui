@@ -1,6 +1,4 @@
-# Проект автотестов на сайт [https://demowebshop.tricentis.com/](https://demowebshop.tricentis.com/)
-
-Проект ui автотестов для https://demowebshop.tricentis.com/.
+# Проект автотестов для [https://demowebshop.tricentis.com/](https://demowebshop.tricentis.com/)
 
 <a name="оглавление"></a>
 
