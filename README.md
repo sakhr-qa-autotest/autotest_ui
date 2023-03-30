@@ -124,6 +124,8 @@ allure_test_mobile | Server started at <http://172.18.0.3:35223/>. Press <Ctrl+C
 rm -rf allure-results
 ```
 
+<img width="90%" title="pytest" src="media/dockerrun.gif" />
+
 <a name="запуск_startsh"></a>
 
 # Запуск start.sh
@@ -147,6 +149,7 @@ rm -rf allure-results
 </details>
 
 <a name="report"></a>
+
 # [Отчет](https://jenkins.autotests.cloud/job/sakhr_autotest_ui/8/allure/#) о выполнении тестов
 
 <details>
@@ -177,7 +180,6 @@ rm -rf allure-results
 - исходного кода страницы,
 - лога консоли браузера,
 - видео выполнения теста.
-
 
 <a name="reportVideo"></a>
 
