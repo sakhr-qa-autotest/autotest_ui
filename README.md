@@ -21,9 +21,9 @@
 
 Результаты
 
-5. [Результат прохождения тестов](#report)
-1. [Пример работы тестов (видео)](#reportVideo)
-2. [Результаты тестов в телеграм](#reportTelegram)
+8. [Результат прохождения тестов](#report)
+9. [Пример работы тестов (видео)](#reportVideo)
+10. [Результаты тестов в телеграм](#reportTelegram)
 
 <a name="технологии"></a>
 
@@ -124,8 +124,6 @@ allure_test_mobile | Server started at <http://172.18.0.3:35223/>. Press <Ctrl+C
 rm -rf allure-results
 ```
 
-<img width="100%" title="pytest" src="media/dockerrun.gif" />
-
 <a name="запуск_startsh"></a>
 
 # Запуск start.sh
@@ -135,6 +133,8 @@ rm -rf allure-results
 ./docker/start.sh
 ```
 
+<img width="100%" title="run" src="media/dockerrun.gif" />
+
 <a name="запуск_дженкинс"></a>
 
 # Запуск тестов в [Jenkins](https://jenkins.autotests.cloud/job/sakhr_autotest_ui/8/allure/)
@@ -142,10 +142,10 @@ rm -rf allure-results
 <details>
 <summary>Jenkins</summary>
 Главная страница сборки
-<img width="90%" title="pytest" src="media/jenkins0.png" />
+<img width="90%" title="jenkins" src="media/jenkins0.png" />
 <br/><br/>
 Сборка с параметрами
-<img width="90%" title="pytest" src="media/jenkins.png" />
+<img width="90%" title="jenkins" src="media/jenkins.png" />
 </details>
 
 <a name="report"></a>
@@ -155,21 +155,27 @@ rm -rf allure-results
 <details>
 <summary>AllureReport</summary>
 Главная страница сборки
-<img width="90%" title="pytest" src="media/allure.png" />
+<img width="90%" title="allure" src="media/allure.png" />
 <br/><br/>
 Сборка с параметрами
-<img width="90%" title="pytest" src="media/allureSuites.png" />
+<img width="90%" title="allureSuites" src="media/allureSuites.png" />
 </details>
 
 
 <details>
 <summary>AllureTestOps</summary>
 Главная страница сборки
-<img width="90%" title="pytest" src="media/allureTestOps.png" />
+<img width="90%" title="allureTestOps" src="media/allureTestOps.png" />
 <br/><br/>
 Сборка с параметрами
-<img width="90%" title="pytest" src="media/allureTestOps1.png" />
+<img width="90%" title="allureTestOps" src="media/allureTestOps1.png" />
 </details>
+
+<details>
+<summary>Browserstack</summary>
+Dashboard
+<img width="90%" title="browserstack" src="media/browserstack.png" />
+<br/><br/>
 
 
 Каждый тест, независимо от результата, состоит из:
@@ -185,11 +191,12 @@ rm -rf allure-results
 
 # Пример прохождения теста на удаленной машине
 
-<img width="90%" title="pytest" src="media/example.gif" />
+<img width="90%" title="example" src="media/example.gif" />
 
 <a name="reportTelegram"></a>
 
 # По результатам работы тестов отправляется краткий отчет в Telegram
 
-<img width="40%" title="pytest" src="media/telegram.png" />
+<img width="40%" title="telegram" src="media/telegram.png" />
+
 
