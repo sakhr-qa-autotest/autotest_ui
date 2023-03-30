@@ -175,7 +175,7 @@ rm -rf allure-results
 <summary>Browserstack</summary>
 <img width="90%" title="browserstack" src="media/browserstack.png" />
 <br/><br/>
-
+</details>
 
 Каждый тест, независимо от результата, состоит из:
 
