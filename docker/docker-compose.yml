@@ -23,7 +23,8 @@ services:
       - ../pyproject.toml:/var/pythonproject/pyproject.toml
       - ../README.md:/var/pythonproject/README.md
       - ../demowebshop:/var/pythonproject/demowebshop/
+      - ../drivers/chromedriver:/var/pythonproject/drivers/chromedriver
       - ../tests:/var/pythonproject/tests/
       - ../allure-results:/var/pythonproject/allure-results/
       - ../config.test.json:/var/pythonproject/config.test.json
-    command: sh -c "google-chrome --version && poetry install && poetry run pytest tests/ --env=test --headless=true --attachments=false"
+    command: sh -c "poetry install && poetry run pytest tests/ --env=test --headless=true --attachments=false --customDriver=True"

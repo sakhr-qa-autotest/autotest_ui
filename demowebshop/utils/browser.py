@@ -115,7 +115,7 @@ class Browser:
 
         if settings.customDriver() == True:
             return webdriver.Chrome(
-                executable_path=abs_path_from_project('../drivers/chromedriver'),
+                abs_path_from_project('../drivers/chromedriver_111_0_5563_19'),
                 options=options
             )
 
