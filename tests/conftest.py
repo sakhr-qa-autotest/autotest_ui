@@ -49,7 +49,11 @@ def cookie(webshop, settings: Settings):
 
 
 @pytest.fixture(scope='function')
-def window(webshop, cookie, settings):
+def window(webshop, cookie, settings, request):
+    if type(request.param) == type({}):
+        if 'browser' in request.param:
+            settings.setBrowser(request.param['browser'])
+
     browser = Browser(settings)
     browser.setDefaultUrl(webshop.webshop.url)
     browser.get(webshop.webshop.url)
