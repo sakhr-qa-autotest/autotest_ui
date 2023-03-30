@@ -42,16 +42,12 @@
 <img width="7%" title="Allure TestOps" src="media/logo/allure_testops.png" />
 </p>
 
-[К оглавлению](#оглавление)
-
 <a name="описание"></a>
 
 # Описание проекта
 
 Автоматизирована проверка сайта https://demowebshop.tricentis.com/.
 Тесты написаны на python с использованием pytest+selenium.
-
-[К оглавлению](#оглавление)
 
 <a name="параметры_запуска"></a>
 
