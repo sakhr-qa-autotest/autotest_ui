@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import utils
+from demowebshop import utils
 
 
 def abs_path_from_project(relative_path: str):

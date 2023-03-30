@@ -1,7 +1,7 @@
 import json
 
-import utils.file
-from utils.const import SELENOID, BROWSERSTACK, LOCAL
+from demowebshop.utils.const import SELENOID, BROWSERSTACK, LOCAL
+from demowebshop.utils.file import abs_path_from_project
 
 
 class Settings:
@@ -33,7 +33,7 @@ class Settings:
 
     def __init__(self, env: str):
         try:
-            fp = open(utils.file.abs_path_from_project(f'config.{env}.json'))
+            fp = open(abs_path_from_project(f'../config.{env}.json'))
             config = json.loads(fp.read())
 
             if 'url' in config:

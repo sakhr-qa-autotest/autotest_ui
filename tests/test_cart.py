@@ -1,10 +1,10 @@
 import allure
 import pytest
 
-from model.page.cart.cart import Cart
-from model.page.cart.product import Product
-from model.page.header_menu import HeaderMenu
-from utils.const import CHROME, FIREFOX
+from demowebshop.model.page.cart.cart import Cart
+from demowebshop.model.page.cart.product import Product
+from demowebshop.model.page.header_menu import HeaderMenu
+from demowebshop.utils.const import CHROME, FIREFOX
 
 
 @allure.title("Состояние корзины в заголовке")

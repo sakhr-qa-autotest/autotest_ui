@@ -5,8 +5,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from webdriver_manager.chrome import ChromeDriverManager
 
-from utils.const import CHROME
-from utils.settings import Settings
+from demowebshop.utils.const import CHROME
+from demowebshop.utils.settings import Settings
 
 
 class Browser:
@@ -32,7 +32,13 @@ class Browser:
 
                 self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
             else:
-                self.browser = webdriver.Chrome(ChromeDriverManager().install())
+                options = webdriver.ChromeOptions()
+
+                if settings.headless() == True:
+                    options.add_argument('headless')
+                    options.add_argument("--no-sandbox")
+
+                self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     def get(self, url: str = None):
         if url is None:

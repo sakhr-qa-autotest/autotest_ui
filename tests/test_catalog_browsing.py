@@ -1,7 +1,7 @@
 import allure
 from selenium.webdriver.support.ui import Select
 
-from model.page.catalog.browsing import Browsing
+from demowebshop.model.page.catalog.browsing import Browsing
 
 
 @allure.title("Проверка наличия обязательных полей")

@@ -2,10 +2,10 @@ from distutils.util import strtobool
 
 import pytest
 
-from utils.allure_attach import AllureAttach
-from utils.authorization import Authorization
-from utils.browser import Browser
-from utils.settings import Settings
+from demowebshop.utils.allure_attach import AllureAttach
+from demowebshop.utils.authorization import Authorization
+from demowebshop.utils.browser import Browser
+from demowebshop.utils.settings import Settings
 
 
 def pytest_addoption(parser):
@@ -50,9 +50,10 @@ def cookie(webshop, settings: Settings):
 
 @pytest.fixture(scope='function')
 def window(webshop, cookie, settings, request):
-    if type(request.param) == type({}):
-        if 'browser' in request.param:
-            settings.setBrowser(request.param['browser'])
+    if hasattr(request, 'param'):
+        if type(request.param) == type({}):
+            if 'browser' in request.param:
+                settings.setBrowser(request.param['browser'])
 
     browser = Browser(settings)
     browser.setDefaultUrl(webshop.webshop.url)

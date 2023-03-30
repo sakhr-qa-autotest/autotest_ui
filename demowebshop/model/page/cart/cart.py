@@ -1,7 +1,7 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
-from model.page.wait import Wait
+from demowebshop.model.page.wait import Wait
 
 
 class Cart():

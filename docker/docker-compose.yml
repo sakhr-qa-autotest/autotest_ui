@@ -22,10 +22,8 @@ services:
     volumes:
       - ../pyproject.toml:/var/pythonproject/pyproject.toml
       - ../README.md:/var/pythonproject/README.md
-      - ../model:/var/pythonproject/model/
-      - ../schemas:/var/pythonproject/schemas/
+      - ../demowebshop:/var/pythonproject/demowebshop/
       - ../tests:/var/pythonproject/tests/
-      - ../utils:/var/pythonproject/utils/
       - ../allure-results:/var/pythonproject/allure-results/
       - ../config.test.json:/var/pythonproject/config.test.json
-    command: sh -c "poetry install && poetry run pytest --env=test --headless=false --attachments=false"
+    command: sh -c "google-chrome --version && poetry install && poetry run pytest tests/ --env=test --headless=true --attachments=false"

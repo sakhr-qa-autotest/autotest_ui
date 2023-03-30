@@ -1,7 +1,7 @@
 import allure
 
-from model.page.header_menu import HeaderMenu
-from model.page.search.search import Search
+from demowebshop.model.page.header_menu import HeaderMenu
+from demowebshop.model.page.search.search import Search
 
 
 @allure.title("Успешный поиск")

@@ -1,5 +1,5 @@
-from utils.base_session import BaseSession
-from utils.settings import Settings
+from demowebshop.utils.base_session import BaseSession
+from demowebshop.utils.settings import Settings
 
 
 class Authorization:

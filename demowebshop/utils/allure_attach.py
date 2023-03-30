@@ -2,7 +2,7 @@ import allure
 from allure_commons.types import AttachmentType
 from selenium.webdriver.chrome.webdriver import WebDriver
 
-from utils.settings import Settings
+from demowebshop.utils.settings import Settings
 
 
 class AllureAttach:

@@ -1,6 +1,6 @@
 import allure
 
-from model.page.compare.compare import Compare
+from demowebshop.model.page.compare.compare import Compare
 
 
 @allure.title("Таблица сравнений товаров")

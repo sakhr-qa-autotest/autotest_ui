@@ -5,8 +5,7 @@ description = ""
 authors = ["autotester <mail@google.com>"]
 readme = "README.md"
 packages = [
-    {include = "model"},
-    {include = "utils"}
+    { include = "demowebshop" }
 ]
 
 [tool.poetry.dependencies]
