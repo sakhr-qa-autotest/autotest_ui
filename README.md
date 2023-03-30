@@ -173,7 +173,6 @@ rm -rf allure-results
 
 <details>
 <summary>Browserstack</summary>
-Dashboard
 <img width="90%" title="browserstack" src="media/browserstack.png" />
 <br/><br/>
 
