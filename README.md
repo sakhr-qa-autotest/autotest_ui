@@ -1,4 +1,4 @@
-# Проект автотестов на сайт [github.com](https://demowebshop.tricentis.com/)
+# Проект автотестов на сайт [https://demowebshop.tricentis.com/](https://demowebshop.tricentis.com/)
 
 Проект ui автотестов для https://demowebshop.tricentis.com/.
 
