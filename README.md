@@ -47,6 +47,14 @@
 Автоматизированая проверка корзины, каталога, поиска, сравнения товаров для сайта  https://demowebshop.tricentis.com/.
 Тесты написаны на python с использованием pytest+selenium.
 
+# Проверяет:
+<b>* Корзина</b><br>
+<b>* Каталог</b><br>
+<b>* Сравнение</b><br>
+<b>* Поиск</b><br>
+
+<a name="параметры_запуска"></a><br>
+
 <a name="параметры_запуска"></a>
 
 # Параметры запуска
@@ -131,7 +139,7 @@ rm -rf allure-results
 
 <a name="запуск_дженкинс"></a>
 
-# Запуск тестов в [Jenkins](https://jenkins.autotests.cloud/job/sakhr_autotest_ui/8/allure/)
+# Запуск тестов в [Jenkins](https://jenkins.autotests.cloud/job/sakhr_autotest_ui/)
 
 <details>
 <summary>Jenkins</summary>
