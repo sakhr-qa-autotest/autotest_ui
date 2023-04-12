@@ -70,10 +70,18 @@ class Browser:
         return self.browser.quit()
 
     def __selenoid(self, settings: Settings) -> CWebDriver:
+        default = {
+            CHROME.lower(): {
+                "version": "100"
+            },
+            FIREFOX.lower(): {
+                "version": "97.0"
+            }
+        }
         options = COptions()
         selenoid_capabilities = {
-            "browserName": settings.browser(),
-            "browserVersion": settings.browser_version(),
+            "browserName": settings.browser().lower(),
+            "browserVersion": default[settings.browser().lower()]['version'],
             "selenoid:options": {
                 "enableVNC": True,
                 "enableVideo": True
@@ -82,7 +90,7 @@ class Browser:
 
         options.capabilities.update(selenoid_capabilities)
         self.browser = webdriver.Remote(
-            command_executor=f"https://{settings.selenoid_login()}:{settings.selenoid_pass()}@{settings.selenoid_hub()}",
+            command_executor=f"https://{settings.selenoid_login()}:{settings.selenoid_pass()}@{settings.selenoid_hub()}/wd/hub",
             options=options
         )
         return self.browser

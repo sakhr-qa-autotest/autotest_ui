@@ -1,7 +1,7 @@
 version: '3'
 services:
   allure:
-    container_name: allure_test_mobile
+    container_name: allure_test_ui
     environment:
       TZ: "Europe/Samara"
     build:
@@ -13,7 +13,7 @@ services:
       - "35223:35223"
     command: sh -c "allure serve /var/allure-results --port 35223"
   python:
-    container_name: pytest_test_mobile
+    container_name: pytest_test_ui
     environment:
       TZ: "Europe/Samara"
     build:

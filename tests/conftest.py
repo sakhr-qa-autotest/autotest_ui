@@ -2,7 +2,7 @@ from distutils.util import strtobool
 
 import pytest
 
-from demowebshop.utils.allure_attach import AllureAttach
+from demowebshop.utils.allure_attach import allure_attach
 from demowebshop.utils.authorization import Authorization
 from demowebshop.utils.browser import Browser
 from demowebshop.utils.settings import Settings
@@ -66,7 +66,7 @@ def window(webshop, cookie, settings, request):
     browser.get(webshop.webshop.url)
     browser.add_cookie(cookie)
     yield browser
-    allureAttach = AllureAttach(settings)
+    allureAttach = allure_attach(settings)
     allureAttach.add(browser.driver())
     browser.quit()
 
