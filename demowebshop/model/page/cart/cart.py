@@ -8,12 +8,12 @@ class Cart():
     def __init__(self, browser: WebDriver):
         self.__browser = browser
 
-    def productTable(self):
+    def product_table(self):
         return self.__browser.find_elements(By.CSS_SELECTOR, 'tr.cart-item-row')
 
-    def updatecart(self):
+    def update_cart(self):
         return self.__browser.find_element(By.CSS_SELECTOR, 'div.common-buttons > input')
 
-    def orderSummaryContent(self):
+    def order_summary_content(self):
         Wait.wait(self.__browser, By.CSS_SELECTOR, 'div.order-summary-content')
         return self.__browser.find_element(By.CSS_SELECTOR, 'div.order-summary-content')

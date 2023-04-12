@@ -91,8 +91,11 @@ poetry install
 #Вариант запуска 1 - Запуск локально всех тестов 
 poetry run pytest tests/ --env=test
 
-#Вариант запуска 1 - Запуск одиночного через browserstack с использованием firefox на OS X
+#Вариант запуска 2 - Запуск одиночного через browserstack с использованием firefox на OS X
 poetry run pytest tests/test_compare.py --env=test --driver=browserstack --browser=firefox --os="OS x" --osVersion=Catalina
+
+#Вариант запуска 2 - Запуск одиночного через browserstack с использованием firefox на OS X
+poetry run pytest tests/test_compare.py --env=test --driver=browserstack --browser=chrome --os=windows --osVersion=11
 ```
 
 <a name="запуск_docker"></a>
@@ -173,11 +176,6 @@ rm -rf allure-results
 <img width="90%" title="allureTestOps" src="media/allureTestOps1.png" />
 </details>
 
-<details>
-<summary>Browserstack</summary>
-<img width="90%" title="browserstack" src="media/browserstack.png" />
-<br/><br/>
-</details>
 
 Каждый тест, независимо от результата, состоит из:
 

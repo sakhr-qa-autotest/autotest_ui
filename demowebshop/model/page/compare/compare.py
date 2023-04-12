@@ -16,11 +16,11 @@ class Compare():
     def clear(self):
         return self.__browser.find_element(By.CSS_SELECTOR, 'a[class=clear-list]')
 
-    def pageBody(self):
+    def page_body(self):
         return self.__browser.find_element(By.CSS_SELECTOR, 'div[class=page-body]')
 
     def products(self):
         return self.__browser.find_elements(By.CSS_SELECTOR, 'tr[class=overview] > td[class=a-center]')
 
-    def productRemoveBuutton(self, element: WebElement):
+    def product_remove_buutton(self, element: WebElement):
         return element.find_element(By.CSS_SELECTOR, 'input[class="button-2 remove-button"]')

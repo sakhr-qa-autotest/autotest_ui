@@ -10,8 +10,8 @@ class HeaderMenu():
     def topcartlink(self) -> WebElement:
         return self.__browser.find_element(By.ID, 'topcartlink')
 
-    def searchInput(self):
+    def search_input(self):
         return self.__browser.find_element(By.CSS_SELECTOR, 'div.search-box > form > input[type="text"]')
 
-    def searchButton(self):
+    def search_button(self):
         return self.__browser.find_element(By.CSS_SELECTOR, 'div.search-box > form > input[type="submit"]')

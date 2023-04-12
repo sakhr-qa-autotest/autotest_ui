@@ -1,17 +1,19 @@
 import datetime
 
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.chrome.options import Options as COptions
+from selenium.webdriver.chrome.webdriver import WebDriver as CWebDriver
+from selenium.webdriver.firefox.webdriver import WebDriver as FWebDriver
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
 
-from demowebshop.utils.const import CHROME
+from demowebshop.utils.const import CHROME, FIREFOX
 from demowebshop.utils.file import abs_path_from_project
 from demowebshop.utils.settings import Settings
 
 
 class Browser:
-    browser: WebDriver = None
+    browser: CWebDriver or FWebDriver = None
     defaultUrl: str = None
     windowSize: str = "default"
     windowSizes: {} = {
@@ -26,6 +28,8 @@ class Browser:
         else:
             if settings.browser().lower() == CHROME.lower():
                 self.browser = self.__chrome(settings)
+            elif settings.browser().lower() == FIREFOX.lower():
+                self.browser = self.__firefox(settings)
             else:
                 self.browser = self.__chrome(settings)
 
@@ -37,21 +41,21 @@ class Browser:
         else:
             self.browser.get(self.defaultUrl + url)
 
-    def driver(self) -> WebDriver:
+    def driver(self) -> CWebDriver or FWebDriver:
         return self.browser
 
-    def selectWindowSize(self, size: str):
+    def select_window_size(self, size: str):
         if size not in self.windowSize:
             raise Exception("Unknown window size")
         else:
             self.windowSize = size
 
-        self.__setWindowSize()
+        self.__set_window_size()
 
-    def setDefaultUrl(self, defaultUrl: str):
+    def set_default_url(self, defaultUrl: str):
         self.defaultUrl = defaultUrl
 
-    def __setWindowSize(self):
+    def __set_window_size(self):
         if self.windowSize in self.windowSizes:
             size = self.windowSizes[self.windowSize]
             Browser.browser.set_window_size(size[0], size[1])
@@ -65,11 +69,11 @@ class Browser:
     def quit(self):
         return self.browser.quit()
 
-    def __selenoid(self, settings: Settings) -> WebDriver:
-        options = Options()
+    def __selenoid(self, settings: Settings) -> CWebDriver:
+        options = COptions()
         selenoid_capabilities = {
             "browserName": settings.browser(),
-            "browserVersion": settings.browserVersion(),
+            "browserVersion": settings.browser_version(),
             "selenoid:options": {
                 "enableVNC": True,
                 "enableVideo": True
@@ -78,30 +82,30 @@ class Browser:
 
         options.capabilities.update(selenoid_capabilities)
         self.browser = webdriver.Remote(
-            command_executor=f"https://{settings.selenoidLogin()}:{settings.selenoidPass()}@{settings.selenoidHub()}",
+            command_executor=f"https://{settings.selenoid_login()}:{settings.selenoid_pass()}@{settings.selenoid_hub()}",
             options=options
         )
         return self.browser
 
-    def __browserstack(self, settings: Settings) -> WebDriver:
-        options = Options()
+    def __browserstack(self, settings: Settings) -> CWebDriver:
+        options = COptions()
         bstack_options = {
             "browserName": settings.browser(),
-            "browserVersion": settings.browserVersion(),
+            "browserVersion": settings.browser_version(),
             "os": settings.os(),
-            "osVersion": settings.osVersion(),
+            "osVersion": settings.os_version(),
             "buildName": "browserstack-build-1",
             "sessionName":
                 datetime.datetime.now().strftime(
                     '%d-%m-%y|%H:%M:%S'
-                ).__str__() + " " + settings.browser() + "_" + settings.browserVersion() + "_" + settings.os() + "_" + settings.osVersion(),
-            "userName": settings.browserstackUserName(),
-            "accessKey": settings.browserstackAccessKey(),
+                ).__str__() + " " + settings.browser() + "_" + settings.browser_version() + "_" + settings.os() + "_" + settings.os_version(),
+            "userName": settings.browserstack_username(),
+            "accessKey": settings.browserstack_access_key(),
         }
 
         options.set_capability('bstack:options', bstack_options)
         self.browser = webdriver.Remote(
-            command_executor=settings.browserstackHub(),
+            command_executor=settings.browserstack_hub(),
             options=options
         )
         return self.browser
@@ -113,10 +117,29 @@ class Browser:
             options.add_argument('headless')
             options.add_argument("--no-sandbox")
 
-        if settings.customDriver() == True:
+        if settings.custom_driver() == True:
             return webdriver.Chrome(
                 abs_path_from_project('../drivers/chromedriver_111_0_5563_19'),
                 options=options
             )
 
         return webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
+    def __firefox(self, settings: Settings) -> webdriver:
+        options = webdriver.FirefoxOptions()
+
+        if settings.headless() == True:
+            options.add_argument('headless')
+            options.add_argument("--no-sandbox")
+
+        if settings.custom_driver() == True:
+            return webdriver.Firefox(
+                abs_path_from_project('../drivers/'),
+                log_path=abs_path_from_project('../drivers/geckodriver.log'),
+                options=options,
+            )
+
+        return webdriver.Firefox(
+            GeckoDriverManager().install(),
+            options=options,
+        )

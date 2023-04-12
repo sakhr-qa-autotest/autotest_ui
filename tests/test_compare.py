@@ -28,7 +28,7 @@ def test_clear(window, webshop):
     with allure.step('Нажимаем на кнопку'):
         compare = Compare(window.driver())
         compare.clear().click()
-        assert compare.pageBody().text == 'You have no items to compare.'
+        assert compare.page_body().text == 'You have no items to compare.'
 
 
 @allure.title("Удааление по отдельности каждый элемент в корзине")
@@ -43,6 +43,6 @@ def test_deleting_elements(window, webshop):
         if len(products) == 0:
             break
         with allure.step('Удаление одного из элементов'):
-            compare.productRemoveBuutton(products[0]).click()
+            compare.product_remove_buutton(products[0]).click()
 
-    assert compare.pageBody().text == 'You have no items to compare.'
+    assert compare.page_body().text == 'You have no items to compare.'

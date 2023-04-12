@@ -23,26 +23,26 @@ def pytest_addoption(parser):
 @pytest.fixture(scope='session')
 def settings(request) -> Settings:
     setting = Settings(request.config.getoption("--env"))
-    setting.setBrowser(request.config.getoption("--browser"))
-    setting.setBrowserVersion(request.config.getoption("--browserVersion"))
-    setting.setOs(request.config.getoption("--os"))
-    setting.setOsVersion(request.config.getoption("--osVersion"))
-    setting.setDriver(request.config.getoption("--driver"))
+    setting.set_browser(request.config.getoption("--browser"))
+    setting.set_browser_version(request.config.getoption("--browserVersion"))
+    setting.set_os(request.config.getoption("--os"))
+    setting.set_os_version(request.config.getoption("--osVersion"))
+    setting.set_driver(request.config.getoption("--driver"))
 
     if type(request.config.getoption("--headless")) != type(True):
-        setting.setHeadless(bool(strtobool(request.config.getoption("--headless"))))
+        setting.set_headless(bool(strtobool(request.config.getoption("--headless"))))
     else:
-        setting.setHeadless(request.config.getoption("--headless"))
+        setting.set_headless(request.config.getoption("--headless"))
 
     if type(request.config.getoption("--attachments")) != type(True):
-        setting.setAttachments(bool(strtobool(request.config.getoption("--attachments"))))
+        setting.set_attachments(bool(strtobool(request.config.getoption("--attachments"))))
     else:
-        setting.setAttachments(request.config.getoption("--attachments"))
+        setting.set_attachments(request.config.getoption("--attachments"))
 
     if type(request.config.getoption("--customDriver")) != type(True):
-        setting.setCustomDriver(bool(strtobool(request.config.getoption("--customDriver"))))
+        setting.set_custom_driver(bool(strtobool(request.config.getoption("--customDriver"))))
     else:
-        setting.setCustomDriver(request.config.getoption("--customDriver"))
+        setting.set_custom_driver(request.config.getoption("--customDriver"))
 
     return setting
 
@@ -59,10 +59,10 @@ def window(webshop, cookie, settings, request):
     if hasattr(request, 'param'):
         if type(request.param) == type({}):
             if 'browser' in request.param:
-                settings.setBrowser(request.param['browser'])
+                settings.set_browser(request.param['browser'])
 
     browser = Browser(settings)
-    browser.setDefaultUrl(webshop.webshop.url)
+    browser.set_default_url(webshop.webshop.url)
     browser.get(webshop.webshop.url)
     browser.add_cookie(cookie)
     yield browser

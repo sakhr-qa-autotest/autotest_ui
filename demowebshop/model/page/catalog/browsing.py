@@ -10,14 +10,14 @@ class Browsing:
     def products(self):
         return self.__browser.find_elements(By.CSS_SELECTOR, 'div[class=item-box]')
 
-    def productImage(self, element: WebElement):
+    def product_image(self, element: WebElement):
         return element.find_element(By.CSS_SELECTOR, 'div[class=picture] > a > img')
 
-    def productPrice(self, element: WebElement):
+    def product_price(self, element: WebElement):
         return element.find_element(By.CSS_SELECTOR, 'div[class=prices] > span')
 
-    def productTitle(self, element: WebElement):
+    def product_title(self, element: WebElement):
         return element.find_element(By.CSS_SELECTOR, 'h2[class=product-title] > a')
 
-    def productsPagesize(self):
+    def products_page_size(self):
         return self.__browser.find_element(By.ID, 'products-pagesize')

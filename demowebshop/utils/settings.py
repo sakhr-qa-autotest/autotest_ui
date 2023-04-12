@@ -8,7 +8,7 @@ class Settings:
     __url: str
     __attachments: bool
     __browser: str
-    __browserVersion: str
+    __browser_version: str
     __login: str
     __pwd: str
     __headless: bool = False
@@ -16,7 +16,7 @@ class Settings:
     __browserstack: bool = False
     __local: bool = False
 
-    __customDriver: bool = False
+    __custom_driver: bool = False
 
     __os: str
     __osVersion: str
@@ -65,13 +65,13 @@ class Settings:
         except:
             raise Exception("Environment file not found")
 
-    def setCustomDriver(self, value=False):
-        self.__customDriver = value
+    def set_custom_driver(self, value=False):
+        self.__custom_driver = value
 
-    def customDriver(self) -> bool:
-        return self.__customDriver
+    def custom_driver(self) -> bool:
+        return self.__custom_driver
 
-    def setDriver(self, driver: str):
+    def set_driver(self, driver: str):
         if BROWSERSTACK.lower() == driver.lower():
             self.__browserstack = True
         elif SELENOID.lower() == driver.lower():
@@ -93,50 +93,50 @@ class Settings:
     def headless(self) -> bool:
         return self.__headless
 
-    def setHeadless(self, value: bool):
+    def set_headless(self, value: bool):
         self.__headless = value
 
     def browserstack(self) -> bool:
         return self.__browserstack
 
-    def setBrowserstack(self, value: bool):
+    def set_browserstack(self, value: bool):
         self.__browserstack = value
 
     def selenoid(self) -> bool:
         return self.__selenoid
 
-    def setSelenoid(self, value: bool):
+    def set_selenoid(self, value: bool):
         self.__selenoid = value
 
     def attachments(self) -> bool:
         return self.__attachments
 
-    def setAttachments(self, value: bool):
+    def set_attachments(self, value: bool):
         self.__attachments = value
 
     def browser(self) -> str:
         return self.__browser
 
-    def browserVersion(self) -> str:
-        return self.__browserVersion
+    def browser_version(self) -> str:
+        return self.__browser_version
 
-    def setOsVersion(self, value: str):
+    def set_os_version(self, value: str):
         self.__osVersion = value
 
-    def osVersion(self) -> str:
+    def os_version(self) -> str:
         return self.__osVersion
 
-    def setOs(self, value: str):
+    def set_os(self, value: str):
         self.__os = value
 
     def os(self) -> str:
         return self.__os
 
-    def setBrowser(self, value: str):
+    def set_browser(self, value: str):
         self.__browser = value
 
-    def setBrowserVersion(self, value: str):
-        self.__browserVersion = value
+    def set_browser_version(self, value: str):
+        self.__browser_version = value
 
     def login(self) -> str:
         return self.__login
@@ -144,26 +144,26 @@ class Settings:
     def pwd(self) -> str:
         return self.__pwd
 
-    def selenoidHub(self) -> str:
+    def selenoid_hub(self) -> str:
         return self.__selenoid_hub
 
-    def selenoidVideoHub(self) -> str:
+    def selenoid_video_hub(self) -> str:
         return self.__selenoid_video_hub
 
-    def selenoidLogin(self) -> str:
+    def selenoid_login(self) -> str:
         return self.__selenoid_login
 
-    def selenoidPass(self) -> str:
+    def selenoid_pass(self) -> str:
         return self.__selenoid_pass
 
-    def browserstackHub(self) -> str:
+    def browserstack_hub(self) -> str:
         return self.__browserstack_hub
 
-    def browserstackVideoHub(self) -> str:
+    def browserstack_video_hub(self) -> str:
         return self.__browserstack_video_hub
 
-    def browserstackUserName(self) -> str:
+    def browserstack_username(self) -> str:
         return self.__browserstack_user_name
 
-    def browserstackAccessKey(self) -> str:
+    def browserstack_access_key(self) -> str:
         return self.__browserstack_access_key

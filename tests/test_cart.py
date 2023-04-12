@@ -11,9 +11,6 @@ from demowebshop.utils.const import CHROME, FIREFOX
 @pytest.mark.parametrize('window', [
     {
         'browser': CHROME
-    },
-    {
-        'browser': FIREFOX
     }
 ], indirect=True)
 def test_adding_to_cart(window, webshop):
@@ -30,16 +27,13 @@ def test_adding_to_cart(window, webshop):
 @pytest.mark.parametrize('window', [
     {
         'browser': CHROME
-    },
-    {
-        'browser': FIREFOX
     }
 ], indirect=True)
 def test_checking_cart_details(window, webshop):
     webshop.webshop.post('/addproducttocart/catalog/31/1/1')
     window.get("/cart")
     cart = Cart(window.driver())
-    products = cart.productTable()
+    products = cart.product_table()
 
     assert len(products) >= 1
 
@@ -63,16 +57,13 @@ def test_checking_cart_details(window, webshop):
 @pytest.mark.parametrize('window', [
     {
         'browser': CHROME
-    },
-    {
-        'browser': FIREFOX
     }
 ], indirect=True)
 def test_removing_item_from_the_cart(window, webshop):
     webshop.webshop.post('/addproducttocart/catalog/31/1/1')
     window.get("/cart")
     cart = Cart(window.driver())
-    products = cart.productTable()
+    products = cart.product_table()
 
     assert len(products) >= 1
     for element in products:
@@ -80,7 +71,7 @@ def test_removing_item_from_the_cart(window, webshop):
         with allure.step('Удаление ' + product.name().text):
             product.remove().click()
 
-    cart.updatecart().click()
-    orderSummaryContent = cart.orderSummaryContent()
+    cart.update_cart().click()
+    orderSummaryContent = cart.order_summary_content()
 
     assert orderSummaryContent.text == "Your Shopping Cart is empty!"

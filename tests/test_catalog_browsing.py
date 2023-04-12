@@ -11,13 +11,13 @@ def test_elements(window):
 
     for product in browsing.products():
         with allure.step('Заголовок'):
-            title = browsing.productTitle(product)
+            title = browsing.product_title(product)
             assert len(title.text) >= 1
         with allure.step('Цена'):
-            price = browsing.productPrice(product)
+            price = browsing.product_price(product)
             assert len(price.text) >= 1
         with allure.step('Картинка'):
-            image = browsing.productImage(product)
+            image = browsing.product_image(product)
             assert len(image.get_attribute('src')) >= 1
 
 
@@ -27,13 +27,13 @@ def test_filter_of_quantity(window):
     browsing = Browsing(window.driver())
 
     with allure.step('Фильтр на отображение 4 элементов'):
-        pagesize = browsing.productsPagesize()
+        pagesize = browsing.products_page_size()
         select = Select(pagesize)
         select.select_by_visible_text("4")
         assert len(browsing.products()) == 4
 
     with allure.step('Фильтр на отображение 8 элементов'):
-        pagesize = browsing.productsPagesize()
+        pagesize = browsing.products_page_size()
         select = Select(pagesize)
         select.select_by_visible_text("8")
         assert len(browsing.products()) == 8

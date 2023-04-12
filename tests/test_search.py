@@ -10,8 +10,8 @@ def test_successful_search(window):
     headerMenu = HeaderMenu(window.driver())
 
     with allure.step('Поиск по фразе build'):
-        headerMenu.searchInput().send_keys("build")
-        headerMenu.searchButton().click()
+        headerMenu.search_input().send_keys("build")
+        headerMenu.search_button().click()
         search = Search(window.driver())
         products = search.products()
 
@@ -24,8 +24,8 @@ def test_unsuccessful_search(window):
     headerMenu = HeaderMenu(window.driver())
 
     with allure.step('Поиск по фразе testestest'):
-        headerMenu.searchInput().send_keys("testestest")
-        headerMenu.searchButton().click()
+        headerMenu.search_input().send_keys("testestest")
+        headerMenu.search_button().click()
         search = Search(window.driver())
         products = search.products()
 
@@ -39,8 +39,8 @@ def test_minimum_input_length(window):
     window.get("")
     headerMenu = HeaderMenu(window.driver())
     with allure.step('Вводим 2 текстовых символа'):
-        headerMenu.searchInput().send_keys("it")
-        headerMenu.searchButton().click()
+        headerMenu.search_input().send_keys("it")
+        headerMenu.search_button().click()
         search = Search(window.driver())
         warning = search.warning()
         assert warning.text == "Search term minimum length is 3 characters"
