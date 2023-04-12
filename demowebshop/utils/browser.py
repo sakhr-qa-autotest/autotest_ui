@@ -148,6 +148,6 @@ class Browser:
             )
 
         return webdriver.Firefox(
-            GeckoDriverManager().install(),
+            executable_path=GeckoDriverManager().install(),
             options=options,
         )
