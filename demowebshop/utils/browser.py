@@ -140,13 +140,6 @@ class Browser:
             options.add_argument('headless')
             options.add_argument("--no-sandbox")
 
-        if settings.custom_driver() == True:
-            return webdriver.Firefox(
-                abs_path_from_project('../drivers/'),
-                log_path=abs_path_from_project('../drivers/geckodriver.log'),
-                options=options,
-            )
-
         return webdriver.Firefox(
             executable_path=GeckoDriverManager().install(),
             options=options,
