@@ -155,7 +155,7 @@ rm -rf allure-results
 
 <a name="report"></a>
 
-# [Отчет](https://jenkins.autotests.cloud/job/sakhr_autotest_ui/8/allure/#) о выполнении тестов
+# [Отчет](https://jenkins.autotests.cloud/job/sakhr_autotest_ui/12/allure/) о выполнении тестов
 
 <details>
 <summary>AllureReport</summary>
